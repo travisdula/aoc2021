@@ -1,4 +1,5 @@
 import Data.List.Split
+import Data.List
 
 type Board = [[(Int, Bool)]]
 
@@ -11,11 +12,6 @@ parser xs = (numsDrawn, boards)
         numsDrawn = map read . splitOn "," . head $ xs
         numberBoards = map tail . chunksOf 6 . map (map read . words) . tail $ xs
         boards = map (map (map (\x -> (x, False)))) numberBoards
-
--- thanks internet for this one
-transpose:: [[a]]->[[a]]
-transpose ([]:_) = []
-transpose x = (map head x) : transpose (map tail x)
 
 isSolved :: Board -> Bool
 isSolved board = vertical || horizontal
